@@ -1,12 +1,21 @@
 pipeline {
     agent any
-    environment {
-        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
-    }
     stages {
-        stage('Checkout') { steps { checkout scm } }
-        stage('Test') { steps { bat 'pytest test_main.py' } }
-        stage('Build Docker Image') { steps { bat 'docker build -t studentgrade:latest .' } }
-        stage('Run Docker Container') { steps { bat 'docker run --rm studentgrade:latest' } }
+        stage('Checkout') {
+            steps { checkout scm }
+        }
+        stage('Test') {
+            steps { bat 'pytest test_main.py' }
+        }
+        stage('Build Docker Image') {
+            steps {
+                bat '"C:\\Users\\Hp\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t studentgrade:latest .'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                bat '"C:\\Users\\Hp\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run --rm studentgrade:latest'
+            }
+        }
     }
 }
