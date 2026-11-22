@@ -1,25 +1,35 @@
-name = input("Enter Student Name: ")
-department = input("Enter Department: ")
-semester = input("Enter Semester: ")
-m1 = float(input("Enter Marks in Subject 1: "))
-m2 = float(input("Enter Marks in Subject 2: "))
-m3 = float(input("Enter Marks in Subject 3: "))
-average = (m1 + m2 + m3) / 3
-if average >= 90:
-    grade = "S"
-elif average >= 80:
-    grade = "A"
-elif average >= 65:
-    grade = "B"
-elif average >= 50:
-    grade = "C"
-elif average >= 40:
-    grade = "D"
-else:
-    grade = "F"
-print("----- Result -----")
-print("Name:", name)
-print("Department:", department)
-print("Semester:", semester)
-print("Average:", average)
-print("Grade:", grade)
+def calculate_grade(average):
+    if average >= 90:
+        return "A"
+    elif average >= 75:
+        return "B"
+    elif average >= 60:
+        return "C"
+    elif average >= 40:
+        return "D"
+    else:
+        return "F"
+
+def calculate_average(marks):
+    return sum(marks) / len(marks)
+
+if __name__ == "__main__":
+    try:
+        name = input("Enter Student Name: ")
+        m1 = int(input("Enter Marks 1: "))
+        m2 = int(input("Enter Marks 2: "))
+        m3 = int(input("Enter Marks 3: "))
+    except EOFError:
+        print("Running in Jenkins - Using Default Values")
+        name = "Neha"
+        m1 = 85
+        m2 = 90
+        m3 = 95
+
+    marks = [m1, m2, m3]
+    avg = calculate_average(marks)
+    grade = calculate_grade(avg)
+
+    print(f"Student: {name}")
+    print(f"Average: {avg}")
+    print(f"Grade: {grade}")
